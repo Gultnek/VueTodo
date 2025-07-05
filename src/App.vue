@@ -71,13 +71,13 @@ const todos = ref([
 const newTodos = computed(() => todos.value.filter(todo => !todo.done));
 const doneTodos = computed(() => todos.value.filter(todo => todo.done));
 
-let nextId = 4;
+let nextId = todos.value.length;
 
 function addTodo() {
   if (newTodoText.value.trim() === '') return;
   
   todos.value.push({
-    id: nextId++,
+    id: ++nextId,
     text: newTodoText.value.trim(),
     done: false
   });
