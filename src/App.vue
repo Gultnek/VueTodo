@@ -154,7 +154,7 @@ h3 {
   border-radius: 6px;
   margin-right: 10px;
   background-color: #0D0714;
-
+  color: white;
 }
 
 .add-button {
