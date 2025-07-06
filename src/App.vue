@@ -1,22 +1,36 @@
+<!-- 
+  TODO: Рекомендуется разбить на компоненты:
+  - TodoForm для формы добавления
+  - TodoList для списка задач
+  - TodoItem для отдельной задачи
+-->
 <template>
   <div class="todo-app">
+    <!-- TODO: семантический тег <header> -->
     <h1>Todo app</h1>
     <h3>Lucas Viga</h3>
     
-    <!-- Форма добавления новой задачи -->
     <div class="container">
+    <!-- TODO: Вынести в компонент TodoForm.vue -->
     <div class="add-todo">
+      <!-- 
+        TODO: Неправильный порядок атрибутов. Должен быть:
+        1. v-директивы (v-model)
+        2. class, placeholder и другие основные атрибуты
+        3. События (@click, @keyup)
+      -->
       <input 
         v-model="newTodoText" 
         @keyup.enter="addTodo"
         placeholder="Add a new task"
         class="todo-input"
       >
+      <!-- TODO: Добавить aria-label для доступности -->
       <button @click="addTodo" class="add-button">+</button>
     </div>
 
+    <!-- TODO: Вынести в компонент TodoList.vue -->
     <div class="todo-lists">
-      <!-- Список новых задач -->
       <div class="todo-column">
         <h2>Task to do -{{ newTodos.length }}</h2>
         <TransitionGroup name="todo" tag="ul">
@@ -27,6 +41,7 @@
           >
             <span>{{ todo.text }}</span>
             <div class="todo-actions">
+              <!-- TODO: Добавить aria-label для доступности -->
               <button @click="completeTodo(todo)" class="action-button">✓</button>
               <button @click="removeTodo(todo)" class="action-button delete">×</button>
             </div>
@@ -34,10 +49,14 @@
         </TransitionGroup>
       </div>
 
-      <!-- Список выполненных задач -->
       <div class="todo-column">
         <h2>Done ({{ doneTodos.length }})</h2>
         <TransitionGroup name="todo" tag="ul">
+          <!-- 
+            TODO: По БЭМ методологии нужно использовать модификатор через --
+            Плохо: class="todo-item done"
+            Хорошо: class="todo-item--done"
+          -->
           <li 
             v-for="todo in doneTodos" 
             :key="todo.id"
@@ -98,21 +117,24 @@ function removeTodo(todo) {
 }
 </script>
 
+<!-- TODO: Добавить scoped для изоляции стилей -->
 <style>
 body {
   background-color: #C8DEC8;
 }
+
 h1 {
   font-weight: bold;
   font-size: 96px;
 }
-h2{
+
+h2 {
   color: white;
   font-size: 19px;
 }
+
 h3 {
   font-size: 60px;
-  
 }
 .container {
   display: flex;
@@ -130,13 +152,13 @@ h3 {
   width: 983px;
   height: 800px;
 }
+
 .todo-app {
   color: #0D0714;
   font-weight: bold;
   font-size: 22px;
   background-color: #C8DEC8;
   margin-left: 250px;
-  
 }
 
 .add-todo {
@@ -195,6 +217,7 @@ h3 {
   color: #9E78CF;
 }
 
+/* TODO: Использовать БЭМ модификатор --done вместо .done */
 .todo-item.done {
   opacity: 0.7;
 }
@@ -236,9 +259,5 @@ h3 {
 .todo-leave-to {
   opacity: 0;
   transform: translateX(30px);
-}
-
-.todo-move {
-  transition: transform 0.5s ease;
 }
 </style>
