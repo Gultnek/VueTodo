@@ -1,54 +1,54 @@
 <template>
   <div class="todo-app">
-    <h1>Todo app</h1>
+    <h1>Todo App</h1>
     <h3>Lucas Viga</h3>
     
     <!-- Форма добавления новой задачи -->
     <div class="container">
-    <div class="add-todo">
-      <input 
-        v-model="newTodoText" 
-        @keyup.enter="addTodo"
-        placeholder="Add a new task"
-        class="todo-input"
-      >
-      <button @click="addTodo" class="add-button">+</button>
-    </div>
+      <div class="add-todo">
+        <input 
+          v-model="newTodoText" 
+          @keyup.enter="addTodo"
+          placeholder="Add a new task"
+          class="todo-input"
+        >
+        <button @click="addTodo" class="add-button"><img src="/images/Plus.png" alt=""></button>
+      </div>
 
     <div class="todo-lists">
       <!-- Список новых задач -->
       <div class="todo-column">
-        <h2>Task to do -{{ newTodos.length }}</h2>
-        <TransitionGroup name="todo" tag="ul">
-          <li 
+        <h2>Task to do - {{ newTodos.length }}</h2>
+        <TransitionGroup name="todo" tag="div">
+          <div 
             v-for="todo in newTodos" 
             :key="todo.id"
             class="todo-item"
           >
             <span>{{ todo.text }}</span>
             <div class="todo-actions">
-              <button @click="completeTodo(todo)" class="action-button">✓</button>
-              <button @click="removeTodo(todo)" class="action-button delete">×</button>
+              <button @click="completeTodo(todo)" class="action-button"><img src="/images/Check.png" alt=""></button>
+              <button @click="removeTodo(todo)" class="action-button delete"><img src="/images/TrashSimple.png" alt=""></button>
             </div>
-          </li>
+          </div>
         </TransitionGroup>
       </div>
 
       <!-- Список выполненных задач -->
       <div class="todo-column">
-        <h2>Done ({{ doneTodos.length }})</h2>
-        <TransitionGroup name="todo" tag="ul">
-          <li 
+        <h2>Done - {{ doneTodos.length }}</h2>
+        <TransitionGroup name="todo" tag="div">
+          <div 
             v-for="todo in doneTodos" 
             :key="todo.id"
             class="todo-item done"
           >
             <span>{{ todo.text }}</span>
             <div class="todo-actions">
-              <button @click="returnTodo(todo)" class="action-button">↩</button>
-              <button @click="removeTodo(todo)" class="action-button delete">×</button>
+              <button @click="returnTodo(todo)" class="action-button"><img src="/images/Check.png" alt=""></button>
+              <button @click="removeTodo(todo)" class="action-button delete"><img src="/images/TrashSimple.png" alt=""></button>
             </div>
-          </li>
+          </div>
         </TransitionGroup>
       </div>
     </div>
@@ -116,9 +116,10 @@ h3 {
 }
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
   flex-direction: column;
+  gap: 16px;
   width: 100%;
   border: 1px solid black;
   border-radius: 100px;
@@ -129,21 +130,21 @@ h3 {
   left: 1000px;
   width: 983px;
   height: 800px;
+  padding: 0 275px;
 }
 .todo-app {
   color: #0D0714;
   font-weight: bold;
   font-size: 22px;
   background-color: #C8DEC8;
-  margin-left: 250px;
-  
 }
 
 .add-todo {
   display: flex;
-  width: 450px;
   margin-bottom: 20px;
   margin-top: 80px;
+  margin-right: 11px;
+  
 }
 
 .todo-input {
@@ -155,16 +156,23 @@ h3 {
   margin-right: 10px;
   background-color: #0D0714;
   color: white;
+  width: 380px;
+  height: 40px;
 }
 
 .add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 15px;
   background: #9E78CF;
-  color: rgb(15, 15, 15);
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 22px;
+  width: 40px;
+  height: 40px;
 }
 
 .todo-lists {
@@ -176,7 +184,6 @@ h3 {
 .todo-column {
   flex: 1;
   background: #0D0714;
-  padding: 15px;
   border-radius: 8px;
   color: black;
   gap: 16px;
@@ -185,14 +192,17 @@ h3 {
 .todo-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  margin: 8px 0;
+  align-items: left;
+  padding: 22px;
+  margin: 16px 0;
   background: #15101C;
-  border:1px solid #3E1671;
+  border:1px solid #15101C;
   border-radius: 9px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   color: #9E78CF;
+  width: 430px;
+  height: 75px;
+  font-size: 18px;
 }
 
 .todo-item.done {
@@ -206,7 +216,7 @@ h3 {
 
 .todo-actions {
   display: flex;
-  gap: 5px;
+  gap: 10px;
 }
 
 .action-button {
