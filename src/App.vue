@@ -45,8 +45,6 @@
           >
             <span>{{ todo.text }}</span>
             <div class="todo-actions">
-              <button @click="returnTodo(todo)" class="action-button"><img src="/images/Check.png" alt=""></button>
-              <button @click="removeTodo(todo)" class="action-button delete"><img src="/images/TrashSimple.png" alt=""></button>
             </div>
           </div>
         </TransitionGroup>
